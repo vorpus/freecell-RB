@@ -103,6 +103,32 @@ class Board
 
   end
 
+  def play_turn
+    render
+    begin
+    move = @player.get_move
+    move(move.first, move.last)
+    render
+    rescue
+      retry
+    end
+  end
+
+  def play_game
+    until won?
+      play_turn
+    end
+    p "grats"
+  end
+
+  def won?
+    won_game = true
+    @homecell.each do |home|
+      won_game = false unless home.stack.length == 13
+    end
+    won_game
+  end
+
   private
   def new_stacks
     @deck = Deck.new
@@ -120,14 +146,5 @@ end
 if __FILE__ == $PROGRAM_NAME
   playa = Player.new("michael scarn")
   b = Board.new(playa)
-  b.render
-  while true
-    begin
-    move = playa.get_move
-    b.move(move.first, move.last)
-    b.render
-    rescue
-      retry
-    end
-  end
+  b.play_game
 end

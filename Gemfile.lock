@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     byebug (9.0.6)
+    colorize (0.8.1)
     diff-lcs (1.2.5)
     rspec (3.4.0)
       rspec-core (~> 3.4.0)
@@ -22,6 +23,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  colorize
   rspec (~> 3.4.0)
 
 BUNDLED WITH

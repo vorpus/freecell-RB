@@ -22,8 +22,3 @@ class Deck
     @deck.empty?
   end
 end
-
-if __FILE__ == $PROGRAM_NAME
-  d = Deck.new
-  puts d.deck
-end
