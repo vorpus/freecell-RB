@@ -1,10 +1,13 @@
 require_relative 'card'
 require_relative 'deck'
 require_relative 'tableau'
+require_relative 'player'
 
 class Board
-  attr_accessor :deck, :freecell, :tableau, :homecell
-  def initialize(deck = nil)
+  attr_accessor :deck, :freecell, :tableau, :homecell, :player
+  def initialize(player, deck = nil)
+    @player = player
+
     #create and populate tableaus
     @tableau = []
     new_stacks.each_with_index do |stack, i|
@@ -14,13 +17,40 @@ class Board
     #create homecells
     @homecell = []
     4.times {@homecell << Homecell.new}
+
+    #create freecells
+    @freecell = []
+    4.times {@freecell << Freecell.new}
   end
 
   def render
+    system("clear")
+    print "\n\n"
+    print " F    R    E    E  ".colorize(:color => :black, :background => :light_white)+
+        "  H    O    M    E  \n".colorize(:color => :white, :background => :light_black)
+    print " 0f   1f   2f   3f  "+" 0h   1h   2h   3h   \n"
     #freecells
+    @freecell.each do |cell|
+      if cell.topcard.nil?
+        print "[ ] "
+      else
+        print "#{cell.topcard.inspect} "
+      end
+      print " "
+    end
+
     #homecells
+    @homecell.each do |cell|
+      if cell.topcard.nil?
+        print "[ ] "
+      else
+        print "#{cell.topcard.inspect} "
+      end
+      print " "
+    end
+    print "\n\n"
 
-
+    print " 0    1    2    3    4    5    6    7    \n"
     #tableau
     #following 3 lines are compensating for ruby's zip function (different from js,py, etc)
     how_many_rows = @tableau.map(&:stack).map(&:size).max
@@ -51,11 +81,26 @@ class Board
   end
 
   def move(start_pos, end_pos)
-    @tableau[end_pos].add(@tableau[start_pos].take_one)
-  end
+    case start_pos[1]
+    when :tableau
+      start_move = @tableau[start_pos[0]]
+    when :freecell
+      start_move = @freecell[start_pos[0]]
+    when :homecell
+      start_move = @homecell[start_pos[0]]
+    end
 
-  def get_move
-    move = gets.chomp.split(",").map(&:to_i)
+    case end_pos[1]
+    when :tableau
+      end_move = @tableau[end_pos[0]]
+    when :freecell
+      end_move = @freecell[end_pos[0]]
+    when :homecell
+      end_move = @homecell[end_pos[0]]
+    end
+
+    end_move.add(start_move.take_one)
+
   end
 
   private
@@ -73,11 +118,16 @@ class Board
 end
 
 if __FILE__ == $PROGRAM_NAME
-  b = Board.new
+  playa = Player.new("michael scarn")
+  b = Board.new(playa)
   b.render
   while true
-    move = b.get_move
+    begin
+    move = playa.get_move
     b.move(move.first, move.last)
     b.render
+    rescue
+      retry
+    end
   end
 end

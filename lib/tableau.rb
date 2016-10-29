@@ -37,6 +37,16 @@ class Homecell < Tableau
   end
 end
 
+class Freecell < Tableau
+  def add(card)
+    if topcard.nil?
+      @stack << card
+    else
+      raise "Freecell can only hold one card at a time."
+    end
+  end
+end
+
 if __FILE__ == $PROGRAM_NAME
   require_relative 'card'
   t = Tableau.new
