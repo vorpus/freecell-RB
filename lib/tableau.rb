@@ -1,7 +1,7 @@
 class Tableau
   attr_accessor :stack
-  
-  def initialize(cards)
+
+  def initialize(cards = [])
     @stack = cards
   end
 
@@ -17,10 +17,24 @@ class Tableau
     end
   end
 
-  def take(card)
+  def take_one
     @stack.pop
   end
 
+end
+
+class Homecell < Tableau
+  def add(card)
+    if topcard.nil? && card.value == :ace
+      @stack << card
+    else
+      if (card.numval == topcard.numval + 1) && (card.suit == topcard.suit)
+        @stack << card
+      else
+        raise "Invalid move for home cell"
+      end
+    end
+  end
 end
 
 if __FILE__ == $PROGRAM_NAME
@@ -28,8 +42,15 @@ if __FILE__ == $PROGRAM_NAME
   t = Tableau.new
   js = Card.new(:spades, :jack)
   th = Card.new(:hearts, :ten)
-  ts = Card.new(:diamonds, :nine)
+  ad = Card.new(:diamonds, :ace)
   t.add(js)
   t.add(th)
-  t.add(ts)
+  # t.add(ts)
+  h = Homecell.new
+  td = Card.new(:diamonds, :deuce)
+  th = Card.new(:hearts, :three)
+  h.add(ad)
+  h.add(td)
+  h.add(th)
+  p h
 end

@@ -32,6 +32,7 @@ class Card
   }
 
   FREECELL_VALUE = {
+    :ace  => 1,
     :deuce => 2,
     :three => 3,
     :four  => 4,
@@ -76,7 +77,7 @@ class Card
     stringified = ""
     stringified << " " if self.value != :ten
     stringified << "#{VALUE_STRINGS[self.value]}#{SUIT_STRINGS[self.suit]}"
-    stringified.colorize(:color => SUIT_COLORS[self.suit], :background => :white)
+    stringified.colorize(:color => SUIT_COLORS[self.suit], :background => :light_white)
   end
 
   def numval

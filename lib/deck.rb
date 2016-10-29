@@ -14,7 +14,7 @@ class Deck
     @deck.shuffle!
   end
 
-  def take
+  def take_one
     @deck.pop
   end
 
