@@ -70,14 +70,6 @@ class Board
     end
     print "\n"
 
-    # how_many_rows = @tableau.map(&:stack).map(&:size).max
-    # p how_many_rows
-    # @tableau.each do |tab|
-    #   tab.stack.each do |el|
-    #     print "#{el.inspect}"
-    #   end
-    #   print "\n"
-    # end
   end
 
   def move(start_pos, end_pos)

@@ -46,21 +46,3 @@ class Freecell < Tableau
     end
   end
 end
-
-if __FILE__ == $PROGRAM_NAME
-  require_relative 'card'
-  t = Tableau.new
-  js = Card.new(:spades, :jack)
-  th = Card.new(:hearts, :ten)
-  ad = Card.new(:diamonds, :ace)
-  t.add(js)
-  t.add(th)
-  # t.add(ts)
-  h = Homecell.new
-  td = Card.new(:diamonds, :deuce)
-  th = Card.new(:hearts, :three)
-  h.add(ad)
-  h.add(td)
-  h.add(th)
-  p h
-end
