@@ -60,11 +60,7 @@ class Card
   attr_accessor :suit, :value
 
   def initialize(suit, value)
-    unless Card.suits.include?(suit) && Card.values.include?(value)
-      raise "Invalid suit/value."
-    end
-    @suit = suit
-    @value = value
+
   end
 
   def color
@@ -81,7 +77,7 @@ class Card
   end
 
   def numval
-    FREECELL_VALUE[self.value]
+
   end
 
 end

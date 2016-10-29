@@ -127,7 +127,7 @@ class Board
     starting_stacks = Array.new(8) {[]}
     counter = 0
     until @deck.empty?
-      starting_stacks[counter % 8] << deck.take_one
+      starting_stacks[counter % 8]
       counter += 1
     end
     starting_stacks

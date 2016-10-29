@@ -6,43 +6,27 @@ class Tableau
   end
 
   def topcard
-    @stack.last
+
   end
 
   def add(card)
-    if topcard.nil? || (card.numval == topcard.numval - 1) && (card.color != topcard.color)
-      @stack << card
-    else
-      raise "Invalid move"
-    end
+    @stack << card
   end
 
   def take_one
-    @stack.pop
+
   end
 
 end
 
-class Homecell < Tableau
+class Homecell
   def add(card)
-    if topcard.nil? && card.value == :ace
-      @stack << card
-    else
-      if (card.numval == topcard.numval + 1) && (card.suit == topcard.suit)
-        @stack << card
-      else
-        raise "Invalid move for home cell"
-      end
-    end
+    @stack << card
   end
 end
 
-class Freecell < Tableau
+class Freecell
   def add(card)
-    if topcard.nil?
-      @stack << card
-    else
-      raise "Freecell can only hold one card at a time."
-    end
+    @stack << card
   end
 end

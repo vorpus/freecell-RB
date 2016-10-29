@@ -14,16 +14,8 @@ class Player
       [pos.to_i, :tableau]
     elsif pos.length == 2
       twopart = pos.split("")
-      case twopart[1]
-      when "t"
-        nextpart = :tableau
-      when "f"
-        nextpart = :freecell
-      when "h"
-        nextpart = :homecell
-      else
-        raise "Please specify tableau, freecell, or homecell"
-      end
+
+
       [twopart[0].to_i, nextpart]
     else
       raise "Couldn't parse input."
