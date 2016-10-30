@@ -1,4 +1,5 @@
 require 'tableau'
+require 'card'
 
 describe Tableau do
   let(:card1) { Card.new(:spades, :jack) }
